@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="/css/bootstrap.min.css">
+    <link rel="stylesheet"  href="/css/style.css">
+    <title>SamplRoo</title>
+    <script src="/js/includeHtml.js"></script>
+</head>
+<body class="w-100 h-100">
+    <div class="h-100 w-100 d-flex flex-column">
+        <div include-html="/components/header.html"></div>
+        <div class="flex-grow-1 py-4">
+            <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+                <div class="step1-heading mb-3"><h3>Choose your favorite brands</h3></div>
+                <div class="mb-3" >
+                    <div include-html="/components/stepper.html" total-steps="5" current-step="3"  ></div>
+                </div>
+                <div class="mb-3">
+                    <div include-html="/components/cards.html" data="productsArr" is-multiple-select="true" on-card-selection="setSelectedProduct" ></div>
+                </div>
+                <div class="button-style px-3 py-2 cursor-pointer" onclick="gotoNextpage()" >Next Step</div>
+            </div>
+        </div>
+        <!-- <div include-html="/components/footer.html"></div> -->
+    </div>
+    <script>
+        // this is something hard-coded in UI, later we may need to get this array of data from backend api. 
+        // let productsArr = [
+        // { id: 1, name: 'Kids Protein', imgUrl: '/images/categories/food/protein/81.jpg', },
+        //     { id: 2, name: 'Ensure', imgUrl: '/images/categories/food/protein/82.jpg' },
+        //     { id: 3, name: 'Whey Protein', imgUrl: '/images/categories/food/protein/83.jpg' },
+        //     { id: 4, name: 'Whey Protein', imgUrl: '/images/categories/food/protein/84.jpg' },
+        //     { id: 5, name: 'Pancake Protein', imgUrl: '/images/categories/food/protein/85.jpg' },
+        //     { id: 6, name: 'Vegan Protein', imgUrl: '/images/categories/food/protein/86.jpg' },
+        //     { id: 7, name: 'Drive', imgUrl: '/images/categories/food/protein/87.jpg' },
+        //     { id: 8, name: 'Zero', imgUrl: '/images/categories/food/protein/88.jpg' },
+        //     { id: 9, name: 'Plant Protein', imgUrl: '/images/categories/food/protein/89.jpg' },
+        //     { id: 10, name: 'Whey Optima', imgUrl: '/images/categories/food/protein/90.jpg' },
+        //     { id: 11, name: 'Pulsin', imgUrl: '/images/categories/food/protein/91.jpg' },
+        //     { id: 12, name: 'V Shake', imgUrl: '/images/categories/food/protein/92.jpg' },
+        //     { id: 13, name: 'Crunchy Fudge', imgUrl: '/images/categories/food/protein/93.jpg' },
+        //     { id: 14, name: 'Protein Bar', imgUrl: '/images/categories/food/protein/94.jpg' },
+        //     { id: 15, name: 'Builder Protein', imgUrl: '/images/categories/food/protein/95.jpg' },
+        //     { id: 16, name: 'HydroxyCut Protein', imgUrl: '/images/categories/food/protein/96.jpg' },
+        //     { id: 17, name: 'Mind Protein', imgUrl: '/images/categories/food/protein/97.jpg' },
+        //     { id: 18, name: 'Battle Oats', imgUrl: '/images/categories/food/protein/98.jpg' },
+        //     { id: 19, name: 'Vector Protein', imgUrl: '/images/categories/food/protein/99.jpg' },
+        //     { id: 20, name: 'FulFil Creams', imgUrl: '/images/categories/food/protein/100.jpg' },
+        // ];
+
+        let selectedProduct = null;
+
+        // to receive the selected product and store it to selectedProduct variable.
+        function setSelectedProduct(item) {
+            selectedProduct = item;
+        }
+
+        // this is to bring included html into current page. 
+        includeHTML();
+
+        // this is to change the url of the browser to load next page. 
+        function gotoNextpage() {
+            // preventing navigation to next page, if none of the cards are selected. 
+            if ( selectedProduct && selectedProduct.length > 0 ) {
+                window.location.href = '/pages/userDetails/userdetails.html';
+            }
+        }
+    </script>
+</body>
+</html>

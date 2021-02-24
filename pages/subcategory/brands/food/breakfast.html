@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="/css/bootstrap.min.css">
+    <link rel="stylesheet"  href="/css/style.css">
+    <title>SamplRoo</title>
+    <script src="/js/includeHtml.js"></script>
+</head>
+<body class="w-100 h-100">
+    <div class="h-100 w-100 d-flex flex-column">
+        <div include-html="/components/header.html"></div>
+        <div class="flex-grow-1 py-4">
+            <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+                <div class="step1-heading mb-3"><h3>Choose your favorite brands</h3></div>
+                <div class="mb-3" >
+                    <div include-html="/components/stepper.html" total-steps="5" current-step="3"  ></div>
+                </div>
+                <div class="mb-3">
+                    <div include-html="/components/cards.html" data="productsArr" is-multiple-select="true" on-card-selection="setSelectedProduct" ></div>
+                </div>
+                <div class="button-style px-3 py-2 cursor-pointer" onclick="gotoNextpage()" >Next Step</div>
+            </div>
+        </div>
+        <!-- <div include-html="/components/footer.html"></div> -->
+    </div>
+    <script>
+        // this is something hard-coded in UI, later we may need to get this array of data from backend api. 
+        let productsArr = [
+        { id: 1, name: 'Corn Flakes', imgUrl: '/images/categories/food/breakfast/1.jpg', },
+            { id: 2, name: 'Fruit and Fibre', imgUrl: '/images/categories/food/breakfast/2.jpg' },
+            { id: 3, name: 'Corn Flakes', imgUrl: '/images/categories/food/breakfast/3.jpg' },
+            { id: 4, name: 'Corn Flakes', imgUrl: '/images/categories/food/breakfast/4.jpg' },
+            { id: 5, name: 'Corn Flakes', imgUrl: '/images/categories/food/breakfast/5.jpg' },
+            { id: 6, name: 'Corn Flakes', imgUrl: '/images/categories/food/breakfast/6.jpg' },
+            { id: 7, name: 'Corn Flakes', imgUrl: '/images/categories/food/breakfast/7.jpg' },
+            { id: 8, name: 'Country Corn Flakes', imgUrl: '/images/categories/food/breakfast/8.jpg' },
+            { id: 9, name: 'All-Bran', imgUrl: '/images/categories/food/breakfast/9.jpg' },
+            { id: 10, name: 'Corn Flakes', imgUrl: '/images/categories/food/breakfast/10.jpg' },
+            { id: 11, name: 'Gold orn Flakes', imgUrl: '/images/categories/food/breakfast/11.jpg' },
+            { id: 12, name: 'Frosted Rice', imgUrl: '/images/categories/food/breakfast/12.jpg' },
+            { id: 13, name: 'Homemade Corn Flakes', imgUrl: '/images/categories/food/breakfast/13.jpg' },
+            { id: 14, name: 'Nesquik Duo', imgUrl: '/images/categories/food/breakfast/14.jpg' },
+            { id: 15, name: 'Grand Corn Flakes', imgUrl: '/images/categories/food/breakfast/15.jpg' },
+            { id: 16, name: 'Corn Flakes', imgUrl: '/images/categories/food/breakfast/16.jpg' },
+            { id: 17, name: 'Big Corn Flakes', imgUrl: '/images/categories/food/breakfast/17.jpg' },
+            { id: 18, name: 'Gold Corn Flakes', imgUrl: '/images/categories/food/breakfast/18.jpg' },
+            { id: 19, name: 'Frosted Flakes', imgUrl: '/images/categories/food/breakfast/19.jpg' },
+            { id: 20, name: 'Crunch Nut', imgUrl: '/images/categories/food/breakfast/20.jpg' },
+        ];
+
+        let selectedProduct = null;
+
+        // to receive the selected product and store it to selectedProduct variable.
+        function setSelectedProduct(item) {
+            selectedProduct = item;
+        }
+
+        // this is to bring included html into current page. 
+        includeHTML();
+
+        // this is to change the url of the browser to load next page. 
+        function gotoNextpage() {
+            // preventing navigation to next page, if none of the cards are selected. 
+            if ( selectedProduct && selectedProduct.length > 0 ) {
+                window.location.href = '/pages/userDetails/userdetails.html';
+            }
+        }
+    </script>
+</body>
+</html>

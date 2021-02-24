@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="/css/bootstrap.min.css">
+    <link rel="stylesheet"  href="/css/style.css">
+    <title>SampleRoo</title>
+    <script src="/js/includeHtml.js"></script>
+</head>
+<body class="w-100 h-100">
+    <div class="h-100 w-100 d-flex flex-column">
+        <div include-html="/components/header.html"></div>
+        <div class="flex-grow-1 py-4">
+            <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+                <div class="step1-heading mb-3"><h3>Choose your favorite brands</h3></div>
+                <div class="mb-3" >
+                    <div include-html="/components/stepper.html" total-steps="5" current-step="3"  ></div>
+                </div>
+                <div class="mb-3">
+                    <div include-html="/components/cards.html" data="productsArr" is-multiple-select="true" on-card-selection="setSelectedProduct" ></div>
+                </div>
+                <div class="button-style px-3 py-2 cursor-pointer" onclick="gotoNextpage()" >Next Step</div>
+            </div>
+        </div>
+        <!-- <div include-html="/components/footer.html"></div> -->
+    </div>
+    <script>
+        // this is something hard-coded in UI, later we may need to get this array of data from backend api. 
+        let productsArr = [
+            { id: 1, name: 'All', imgUrl: '/images/categories/cleaning/laundry/All.jpg', },
+            { id: 2, name: 'Ariel', imgUrl: '/images/categories/cleaning/laundry/Ariel.jpg' },
+            { id:3, name:'Cheer', imgUrl: '/images/categories/cleaning/laundry/Cheer.jpg'},
+            { id:4, name:'Comfort', imgUrl: '/images/categories/cleaning/laundry/Comfort.png'},
+            { id:5, name:'Daz', imgUrl: '/images/categories/cleaning/laundry/Daz.png'},
+            { id:6, name:'Dettol', imgUrl: '/images/categories/cleaning/laundry/Dettol.jpg'},
+            { id:7, name:'Ecos', imgUrl: '/images/categories/cleaning/laundry/Ecos.jpg'},
+            { id:8, name:'Ecover', imgUrl: '/images/categories/cleaning/laundry/Ecover.jpg'},
+            { id:9, name:'Fairy', imgUrl: '/images/categories/cleaning/laundry/Fairy.png'},
+            { id:10, name:'Frosch', imgUrl: '/images/categories/cleaning/laundry/Frosch.jpg'},
+            { id:11, name:'Gain', imgUrl: '/images/categories/cleaning/laundry/Gain.jpg'},
+            { id:12, name:'Lovely Clean', imgUrl: '/images/categories/cleaning/laundry/LovelyClean.png'},
+            { id:13, name:'Lysol', imgUrl: '/images/categories/cleaning/laundry/Lysol.png'},
+            { id:14, name:'Oxi Clean', imgUrl: '/images/categories/cleaning/laundry/OxiClean.jpg'},
+            { id:15, name:'Persil', imgUrl: '/images/categories/cleaning/laundry/Persil.jpg'},
+            { id:16, name:'Purex', imgUrl: '/images/categories/cleaning/laundry/purex.jpg'},
+            { id:17, name:'Sunlight', imgUrl: '/images/categories/cleaning/laundry/sunlight.png'},
+            { id:18, name:'Surf', imgUrl: '/images/categories/cleaning/laundry/Surf.png'},
+            { id:19, name:'Tide', imgUrl: '/images/categories/cleaning/laundry/Tide.jpg'},
+            { id:20, name:'Vaska', imgUrl: '/images/categories/cleaning/laundry/Vaska.jpg'},
+           
+            
+            
+        ];
+
+        let selectedProduct = null;
+
+        // to receive the selected product and store it to selectedProduct variable.
+        function setSelectedProduct(item) {
+            selectedProduct = item;
+        }
+
+        // this is to bring included html into current page. 
+        includeHTML();
+
+        // this is to change the url of the browser to load next page. 
+        function gotoNextpage() {
+            // preventing navigation to next page, if none of the cards are selected. 
+            if ( selectedProduct && selectedProduct.length > 0 ) {
+                window.location.href = '/pages/userDetails/userdetails.html';
+            }
+        }
+    </script>
+</body>
+</html>

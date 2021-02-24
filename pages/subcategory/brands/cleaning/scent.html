@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="/css/bootstrap.min.css">
+    <link rel="stylesheet"  href="/css/style.css">
+    <title>SampleRoo</title>
+    <script src="/js/includeHtml.js"></script>
+</head>
+<body class="w-100 h-100">
+    <div class="h-100 w-100 d-flex flex-column">
+        <div include-html="/components/header.html"></div>
+        <div class="flex-grow-1 py-4">
+            <div class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+                <div class="step1-heading mb-3"><h3>Choose your favorite brands</h3></div>
+                <div class="mb-3" >
+                    <div include-html="/components/stepper.html" total-steps="5" current-step="3"  ></div>
+                </div>
+                <div class="mb-3">
+                    <div include-html="/components/cards.html" data="productsArr" is-multiple-select="true" on-card-selection="setSelectedProduct" ></div>
+                </div>
+                <div class="button-style px-3 py-2 cursor-pointer" onclick="gotoNextpage()" >Next Step</div>
+            </div>
+        </div>
+        <!-- <div include-html="/components/footer.html"></div> -->
+    </div>
+    <script>
+        // this is something hard-coded in UI, later we may need to get this array of data from backend api. 
+        let productsArr = [
+            { id: 1, name:'Avant', imgUrl: '/images/categories/cleaning/scent/Avant.png'},
+            { id: 2, name:'Bath and Body Works', imgUrl: '/images/categories/cleaning/scent/bath-and-body-works.jpg'},
+            { id:3, name:'Clean Well', imgUrl: '/images/categories/cleaning/scent/CleanWell.jpg'},
+            { id:4, name:'Dettol', imgUrl: '/images/categories/cleaning/scent/Dettol.jpg'},
+            { id:5, name:'Eden', imgUrl: '/images/categories/cleaning/scent/Eden.jpg'},
+            { id:6, name:'Freshwave', imgUrl: '/images/categories/cleaning/scent/Freshwave.jpg'},
+            { id:7, name:'Gentle', imgUrl: '/images/categories/cleaning/scent/Gentle.jpg'},
+            { id:8, name:'Germ X', imgUrl: '/images/categories/cleaning/scent/germ-x.jpg'},
+            { id:9, name:'Himalaya', imgUrl: '/images/categories/cleaning/scent/Himalaya.jpg'},
+            { id:10, name:'Kill Dat', imgUrl: '/images/categories/cleaning/scent/KillDat.jpg'},
+            { id:11, name:'Kleenex', imgUrl: '/images/categories/cleaning/scent/Kleenex.png'},
+            { id:12, name:'Lifebuoy', imgUrl: '/images/categories/cleaning/scent/Lifebuoy.jpg'},
+            { id:13, name:'Med Guard', imgUrl: '/images/categories/cleaning/scent/MedGuard.jpg'},
+            { id:14, name:'Ortex', imgUrl: '/images/categories/cleaning/scent/Ortex.jpg'},
+            { id:15, name:'Protek', imgUrl: '/images/categories/cleaning/scent/Protek.jpg'},
+            { id:16, name:'Purell', imgUrl: '/images/categories/cleaning/scent/Purell.jpg'},
+            { id:17, name:'Safe Guard', imgUrl: '/images/categories/cleaning/scent/Safeguard.jpg'},
+            { id:18, name:'Savlon', imgUrl: '/images/categories/cleaning/scent/Savlon.jpg'},
+            { id:19, name:'Sanitelle', imgUrl: '/images/categories/cleaning/scent/Sanitelle.jpg'},
+            { id:20, name:'Tur Fresh', imgUrl: '/images/categories/cleaning/scent/TurFresh.jpg'},
+           
+            
+            
+        ];
+
+        let selectedProduct = null;
+
+// to receive the selected product and store it to selectedProduct variable.
+function setSelectedProduct(item) {
+    selectedProduct = item;
+}
+
+// this is to bring included html into current page. 
+includeHTML();
+
+// this is to change the url of the browser to load next page. 
+function gotoNextpage() {
+    // preventing navigation to next page, if none of the cards are selected. 
+    if ( selectedProduct && selectedProduct.length > 0 ) {
+        window.location.href = '/pages/userDetails/userdetails.html';
+    }
+}
+    </script>
+</body>
+</html>
